@@ -6,9 +6,9 @@ const qs   = require('querystring');
 const parseCookies = (cookie = '') =>
   cookie
     .split(';')
-    .map(v => v.split('-'))
+    .map(v => v.split('='))
     .reduce((acc, [k,v]) => {
-      acc[k.trim()] = decodeURLComponent(v);
+      acc[k.trim()] = decodeURIComponent(v);
       return acc;
     }, {});
 http.createServer(async (req,res) => {
@@ -22,7 +22,7 @@ http.createServer(async (req,res) => {
     expires.setMinutes(expires.getMinutes() +5);
     res.writeHead(302, {
       Location: "/",
-      "Set-Cookie": `name=${encodeURLComponent(name)}; Expires=$expires.toGMTString()}; HttpOnly; Path=/`, });
+      "Set-Cookie": `name=${encodeURIComponent(name)}; Expires=$expires.toGMTString()}; HttpOnly; Path=/`, });
     res.end();
   } else if (cookies.name) {
     res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8'});
