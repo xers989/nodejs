@@ -30,6 +30,10 @@ Make a folder "config" and create config.json file
     "dialect": "mysql"
   }
 }
-
-
 ```
+### Running Node
+``` bash
+$ npm start
+```
+The address to access
+http://localhost:3001/
